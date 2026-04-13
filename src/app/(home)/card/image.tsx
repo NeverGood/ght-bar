@@ -8,7 +8,9 @@ import { Item } from "@/models/types";
 export function getBottleImageUrl(image: Item["image"]) {
     const defaultImageUrl = "/images/whiskey.svg";
 
-    return image ? `/images/${encodeURIComponent(image)}` : defaultImageUrl;
+    return image
+        ? `http://ght.bar/images/${encodeURIComponent(image)}`
+        : defaultImageUrl;
 }
 
 export default function ImageComponent({
@@ -27,7 +29,11 @@ export default function ImageComponent({
     quality?: number;
 }) {
     const defaultImageUrl = "/images/whiskey.svg";
-    const imageUrl = getBottleImageUrl(image);
+    const [imageSrc, setImageSrc] = React.useState(getBottleImageUrl(image));
+
+    React.useEffect(() => {
+        setImageSrc(getBottleImageUrl(image));
+    }, [image]);
 
     return (
         <Image
@@ -36,9 +42,10 @@ export default function ImageComponent({
             className={className}
             height={height}
             loading="lazy"
+            onError={() => setImageSrc(defaultImageUrl)}
             placeholder="blur"
             quality={quality}
-            src={imageUrl}
+            src={imageSrc}
             width={width}
         />
     );
