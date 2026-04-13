@@ -71,6 +71,7 @@ const handler = async (req: NextRequest) => {
             const countryOrigin = data.get("countryOrigin") as string;
             const user = data.get("user") as string;
             const file: File | null = data.get("image") as unknown as File;
+            const now = new Date();
 
             if (file) {
                 const bytes = await file.arrayBuffer();
@@ -85,13 +86,14 @@ const handler = async (req: NextRequest) => {
                 },
 
                 data: {
-                    name,
                     countryOrigin,
-                    user,
-                    type,
-                    strength: Number(strength),
                     //@ts-ignore
                     image: file?.name ?? bottle.image,
+                    name,
+                    strength: Number(strength),
+                    type,
+                    updatedAt: now,
+                    user,
                 },
             });
 

@@ -27,6 +27,7 @@ const handler = async (req: NextRequest) => {
         const countryOrigin = data.get("countryOrigin") as string;
         const user = data.get("user") as string;
         const file: File | null = data.get("image") as unknown as File;
+        const now = new Date();
 
         if (file) {
             const bytes = await file.arrayBuffer();
@@ -37,12 +38,15 @@ const handler = async (req: NextRequest) => {
 
         await prisma.items.create({
             data: {
-                name,
                 countryOrigin,
-                user,
-                type,
-                strength: Number(strength),
+                createdAt: now,
                 image: file?.name ?? "",
+                name,
+                notes: "",
+                strength: Number(strength),
+                type,
+                updatedAt: now,
+                user,
             },
         });
 

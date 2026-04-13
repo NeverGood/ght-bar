@@ -30,12 +30,15 @@ const handler = async (req: NextRequest) => {
 
     if (!(hasLogin || hasEmail)) {
         try {
+            const now = new Date();
             await prisma.users.create({
                 data: {
-                    username: login,
+                    createdAt: now,
+                    isAdmin: false,
                     mail: mail,
                     password: bCrypt.hashSync(password, bCrypt.genSaltSync(8)),
-                    isAdmin: false,
+                    updatedAt: now,
+                    username: login,
                 },
             });
 
