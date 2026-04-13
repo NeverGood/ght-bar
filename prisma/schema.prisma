@@ -13,8 +13,6 @@ model countries {
   name      String?  @db.VarChar(255)
   createdAt DateTime @db.DateTime(0)
   updatedAt DateTime @db.DateTime(0)
-
-  @@map("Country")
 }
 
 model items {
@@ -29,8 +27,6 @@ model items {
   code_iso      String?  @db.VarChar(255)
   createdAt     DateTime @db.DateTime(0)
   updatedAt     DateTime @db.DateTime(0)
-
-  @@map("Item")
 }
 
 model types {
@@ -38,8 +34,6 @@ model types {
   type      String?  @db.VarChar(255)
   createdAt DateTime @db.DateTime(0)
   updatedAt DateTime @db.DateTime(0)
-
-  @@map("Type")
 }
 
 model users {
@@ -50,6 +44,4 @@ model users {
   isAdmin   Boolean?
   createdAt DateTime @db.DateTime(0)
   updatedAt DateTime @db.DateTime(0)
-
-  @@map("User")
 }
