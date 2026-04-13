@@ -8,7 +8,7 @@ import { Item } from "@/models/types";
 export function getBottleImageUrl(image: Item["image"]) {
     const defaultImageUrl = "/images/whiskey.svg";
 
-    return image ? `http://ght.bar/images/${image}` : defaultImageUrl;
+    return image ? `/images/${encodeURIComponent(image)}` : defaultImageUrl;
 }
 
 export default function ImageComponent({
