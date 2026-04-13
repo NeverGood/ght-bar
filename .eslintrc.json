@@ -20,7 +20,7 @@
         ],
 
         "sort-keys": [
-            "warning",
+            1,
             "asc",
             { "caseSensitive": true, "natural": false, "minKeys": 2 }
         ]

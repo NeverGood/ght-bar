@@ -24,10 +24,13 @@ export type CatalogOverview = {
     totalUsers: number;
 };
 
-export type HeroBottle = Pick<
-    Item,
-    "countryOrigin" | "id" | "image" | "name" | "type"
->;
+export type HeroBottle = {
+    countryOrigin: string;
+    id: number;
+    image: string;
+    name: string;
+    type: string;
+};
 
 const MOCK_BOTTLES: Item[] = [
     {
@@ -336,7 +339,13 @@ export async function getHeroBottles(): Promise<HeroBottle[]> {
         });
 
         if (items.length > 0) {
-            return items;
+            return items.map((item) => ({
+                countryOrigin: item.countryOrigin || "",
+                id: item.id,
+                image: item.image || "",
+                name: item.name || "",
+                type: item.type || "",
+            }));
         }
     } catch {}
 

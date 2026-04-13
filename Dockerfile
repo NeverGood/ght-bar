@@ -1,14 +1,26 @@
-FROM node:20-alpine AS deps
-RUN apk add --no-cache libc6-compat
+FROM node:20-bookworm-slim AS base
 WORKDIR /app
 
-COPY . .
-RUN  npm ci
+FROM base AS deps
+COPY package*.json ./
+RUN npm ci
 
+FROM deps AS build
+COPY . .
+RUN npx prisma generate
 RUN npm run build
 
-EXPOSE 3000
+FROM base AS runner
+ENV NODE_ENV=production
+ENV PORT=3000
 
-ENV PORT 3000
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=build /app/.next ./.next
+COPY --from=build /app/public ./public
+COPY --from=build /app/prisma ./prisma
+COPY --from=build /app/package.json ./package.json
+COPY --from=build /app/next.config.js ./next.config.js
+
+EXPOSE 3000
 
 CMD ["npm", "start"]

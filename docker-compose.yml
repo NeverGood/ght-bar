@@ -1,12 +1,13 @@
-version: "1"
-
 services:
-    next-server:
-        build: .
-        image: nextjs
-        container_name: next-server
-        ports:
-            - "3000:3000"
-        volumes:
-            - /home/shared/images:/app/public/images
-        restart: on-failure
+  ght-bar:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ght-bar
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - ./public/images:/app/public/images
