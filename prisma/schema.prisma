@@ -11,8 +11,10 @@ model countries {
   id        Int      @id @default(autoincrement())
   code_iso  String?  @db.VarChar(255)
   name      String?  @db.VarChar(255)
-  createdAt DateTime @db.DateTime(0) @default(now())
-  updatedAt DateTime @db.DateTime(0) @default(now())
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+
+  @@map("Country")
 }
 
 model items {
@@ -25,23 +27,29 @@ model items {
   notes         String?  @db.VarChar(255)
   user          String?  @db.VarChar(255)
   code_iso      String?  @db.VarChar(255)
-  createdAt     DateTime? @db.DateTime(0) @default(now())
-  updatedAt     DateTime? @db.DateTime(0) @default(now())
+  createdAt     DateTime @db.DateTime(0)
+  updatedAt     DateTime @db.DateTime(0)
+
+  @@map("Item")
 }
-//update prisma
+
 model types {
   id        Int      @id @default(autoincrement())
   type      String?  @db.VarChar(255)
-  createdAt DateTime @db.DateTime(0) @default(now())
-  updatedAt DateTime @db.DateTime(0) @default(now())
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+
+  @@map("Type")
 }
 
 model users {
   id        Int      @id @default(autoincrement())
-  username  String?  @db.VarChar(255) @unique
+  username  String?  @db.VarChar(255)
   mail      String?  @db.VarChar(255)
   password  String   @db.VarChar(255)
   isAdmin   Boolean?
-  createdAt DateTime? @db.DateTime(0) @default(now())
-  updatedAt DateTime? @db.DateTime(0) @default(now())
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+
+  @@map("User")
 }
