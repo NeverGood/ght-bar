@@ -21,9 +21,9 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className="bg-slate-100">
+            <body className="bg-[#06070a] text-stone-100">
                 <SessionProviderComponent>
-                    <Theme>
+                    <Theme appearance="dark" accentColor="amber" grayColor="sand">
                         <div className="flex flex-col min-h-full">
                             {/* @ts-ignore */}
                             <Header />

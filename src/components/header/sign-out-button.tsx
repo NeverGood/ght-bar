@@ -19,9 +19,9 @@ export default function SignOutButton() {
     };
 
     return (
-        <div className="cursor-pointer px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
+        <div className="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
             <a
-                className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                className="inline-flex h-11 cursor-pointer items-center px-3 text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                 onMouseUp={onSignOut}
             >
                 <>

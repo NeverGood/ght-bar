@@ -12,16 +12,16 @@ export default async function Header() {
     const session = await getServerSession(authOptions);
 
     return (
-        <header className="sticky top-0 w-full z-50">
-            <div>
-                <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-slate-950 mb-3">
-                    <div className="container px-4 mx-auto flex flex-row flex-wrap items-center justify-between">
+        <header className="w-full px-3 pt-3">
+            <div className="mx-auto w-full max-w-[1180px]">
+                <nav className="relative mb-3 flex flex-wrap items-center justify-between rounded-[26px] border border-white/8 bg-[rgba(8,11,16,0.92)] px-2 py-3 shadow-[0_24px_60px_rgba(0,0,0,0.38)] backdrop-blur">
+                    <div className="container mx-auto flex flex-row flex-wrap items-center justify-between px-4">
                         <div className="relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
                             <Link
-                                className="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
+                                className="mr-4 inline-block whitespace-nowrap py-2 text-sm font-bold leading-relaxed tracking-[0.08em] text-[#f6f0e6]"
                                 href="/"
                             >
-                                ghT Mini-Bottles Collection
+                                ghT Mini Bar
                             </Link>
                         </div>
                         <div
@@ -29,8 +29,7 @@ export default async function Header() {
                             id="example-navbar-danger"
                         >
                             <ul
-                                className="flex
-                            flex-row list-none lg:ml-auto"
+                                className="flex flex-row items-center gap-1 list-none lg:ml-auto"
                             >
                                 {/* <li className="nav-item">
                                     <a
@@ -53,13 +52,21 @@ export default async function Header() {
                                 {!session && <SignButton />}
                                 {session && (
                                     <>
+                                        <li className="nav-item">
+                                            <div className="inline-flex h-11 min-w-[96px] items-center justify-center rounded-full border border-white/8 bg-white/[0.04] px-4 text-xs font-semibold uppercase tracking-[0.14em] text-stone-300">
+                                                {
+                                                    //@ts-ignore
+                                                    session?.user?.username
+                                                }
+                                            </div>
+                                        </li>
                                         {
                                             //@ts-ignore TODO изменить тип
                                             session?.user?.isAdmin && (
                                                 <li className="nav-item cursor-pointer">
-                                                    <div className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
+                                                    <div className="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
                                                         <Link
-                                                            className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                                                            className="inline-flex h-11 items-center px-3 text-xs font-bold uppercase leading-snug text-white hover:opacity-75"
                                                             href={`/admin`}
                                                         >
                                                             <>

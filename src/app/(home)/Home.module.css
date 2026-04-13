@@ -1,125 +1,337 @@
-.main {
+.page {
+    width: 100%;
     min-height: 100vh;
-    padding: 4rem 0;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    padding: 0 24px 64px;
+    color: #f6f0e6;
+    background:
+        radial-gradient(circle at top left, rgba(213, 162, 92, 0.12), transparent 22%),
+        radial-gradient(circle at 85% 12%, rgba(154, 74, 68, 0.12), transparent 20%),
+        linear-gradient(180deg, #06080b 0%, #0a0d12 42%, #040507 100%);
+    font-family: "Avenir Next", "Segoe UI", sans-serif;
 }
 
-.footer {
-    display: flex;
-    flex: 1;
-    padding: 2rem 0;
-    border-top: 1px solid #eaeaea;
-    justify-content: center;
-    align-items: center;
+.page::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.12;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
 }
 
-.footer a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
+.hero,
+.stats,
+.showcase,
+.catalogSection {
+    width: min(1180px, 100%);
+    margin: 0 auto;
 }
 
-.title a {
-    color: #0070f3;
-    text-decoration: none;
+.hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+    gap: 22px;
+    padding-top: 18px;
 }
 
-.title a:hover,
-.title a:focus,
-.title a:active {
-    text-decoration: underline;
+.heroCopy,
+.heroVisual,
+.showcaseCard,
+.statCard,
+.catalogSection {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: linear-gradient(
+        160deg,
+        rgba(14, 17, 24, 0.94),
+        rgba(9, 11, 16, 0.9)
+    );
+    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.38);
+    backdrop-filter: blur(18px);
 }
 
-.title {
+.heroCopy,
+.heroVisual {
+    border-radius: 32px;
+}
+
+.heroCopy {
+    padding: 52px 48px;
+}
+
+.eyebrow {
+    margin: 0 0 10px;
+    color: #d5a25c;
+    font-size: 0.72rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    opacity: 0.92;
+}
+
+.heroTitle,
+.sectionHeading h2,
+.showcaseCard h3 {
     margin: 0;
-    line-height: 1.15;
-    font-size: 4rem;
+    font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    letter-spacing: 0.02em;
 }
 
-.title,
-.description {
-    text-align: center;
+.heroTitle {
+    font-size: clamp(2.85rem, 5.3vw, 4.55rem);
+    line-height: 0.94;
+    white-space: nowrap;
 }
 
-.description {
-    margin: 4rem 0;
-    line-height: 1.5;
-    font-size: 1.5rem;
+.heroText {
+    max-width: 34rem;
+    margin: 24px 0 0;
+    color: #b0a79c;
+    font-size: 1rem;
+    line-height: 1.9;
 }
 
-.code {
-    background: #fafafa;
-    border-radius: 5px;
-    padding: 0.75rem;
-    font-size: 1.1rem;
-    font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-        DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-}
-
-.grid {
+.heroActions {
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-wrap: wrap;
-    max-width: 800px;
+    gap: 14px;
+    margin-top: 30px;
 }
 
-.card {
-    margin: 1rem;
-    padding: 1.5rem;
-    text-align: left;
-    color: inherit;
+.primaryAction,
+.secondaryAction {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 0 24px;
     text-decoration: none;
-    border: 1px solid #eaeaea;
-    border-radius: 10px;
-    transition: color 0.15s ease, border-color 0.15s ease;
-    max-width: 300px;
+    font-size: 0.98rem;
+    transition:
+        transform 180ms ease,
+        background 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
 }
 
-.card:hover,
-.card:focus,
-.card:active {
-    color: #0070f3;
-    border-color: #0070f3;
+.primaryAction {
+    background: linear-gradient(135deg, #f1c37d, #bf8144);
+    color: #19140f;
+    font-weight: 700;
+    box-shadow: 0 10px 24px rgba(191, 129, 68, 0.2);
 }
 
-.card h2 {
-    margin: 0 0 1rem 0;
-    font-size: 1.5rem;
+.secondaryAction {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+    color: #f6f0e6;
+    font-weight: 600;
 }
 
-.card p {
+.primaryAction:hover,
+.secondaryAction:hover {
+    transform: translateY(-1px);
+}
+
+.heroVisual {
+    min-height: 520px;
+    padding: 0;
+    background:
+        radial-gradient(circle at 20% 18%, rgba(213, 162, 92, 0.06), transparent 28%),
+        linear-gradient(180deg, #0b0e14 0%, #07090d 100%);
+}
+
+.heroPhotoWrap {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: inherit;
+}
+
+.heroPhotoWrap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(3, 4, 6, 0.16) 0%, rgba(4, 5, 8, 0.05) 28%, rgba(3, 4, 6, 0.5) 100%),
+        radial-gradient(circle at 54% 64%, rgba(226, 151, 63, 0.1), transparent 26%);
+    pointer-events: none;
+}
+
+.heroPhoto {
+    object-fit: cover;
+    object-position: center 54%;
+    filter: saturate(0.97) contrast(1.06) brightness(0.9);
+}
+
+.heroBadge {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    z-index: 4;
+    width: 138px;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(8, 10, 14, 0.62);
+    padding: 14px 14px 12px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
+}
+
+.heroBadge span,
+.statCard strong {
+    display: block;
+    font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    font-size: 2.05rem;
+    color: #f6f0e6;
+}
+
+.heroBadge p,
+.statCard span,
+.showcaseCard p,
+.showcaseCard span {
     margin: 0;
-    font-size: 1.25rem;
-    line-height: 1.5;
+    color: #aaa298;
 }
 
-.logo {
-    height: 1em;
-    margin-left: 0.5rem;
+.heroVolumeBadge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 4;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 999px;
+    background: rgba(8, 10, 14, 0.48);
+    padding: 8px 14px;
+    color: #d8c9af;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    backdrop-filter: blur(10px);
 }
 
-@media (max-width: 600px) {
-    .grid {
-        width: 100%;
-        flex-direction: column;
+.heroBadge p {
+    font-size: 0.86rem;
+    line-height: 1.45;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 28px;
+}
+
+.statCard {
+    border-radius: 24px;
+    padding: 24px;
+}
+
+.showcase {
+    margin-top: 28px;
+}
+
+.sectionHeading {
+    margin-bottom: 18px;
+}
+
+.sectionHeading h2 {
+    font-size: clamp(2.1rem, 4.2vw, 3.2rem);
+}
+
+.showcaseGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.showcaseCard {
+    min-height: 220px;
+    border-radius: 28px;
+    padding: 28px;
+}
+
+.showcaseCard span {
+    display: inline-block;
+    margin-bottom: 22px;
+    color: #d5a25c;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+}
+
+.showcaseCard h3 {
+    margin-bottom: 12px;
+    font-size: 2rem;
+}
+
+.showcaseCard p {
+    line-height: 1.7;
+}
+
+.catalogSection {
+    margin-top: 28px;
+    border-radius: 32px;
+    padding: 32px;
+}
+
+@media (max-width: 1080px) {
+    .hero,
+    .showcaseGrid,
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .heroVisual {
+        min-height: 620px;
     }
 }
 
-@media (prefers-color-scheme: dark) {
-    .card,
-    .footer {
-        border-color: #222;
+@media (max-width: 720px) {
+    .page {
+        padding: 0 16px 48px;
     }
-    .code {
-        background: #111;
+
+    .heroCopy,
+    .catalogSection,
+    .heroVisual,
+    .showcaseCard,
+    .statCard {
+        border-radius: 24px;
     }
-    .logo img {
-        filter: invert(1);
+
+    .heroCopy {
+        padding: 30px 22px;
+    }
+
+    .heroTitle {
+        white-space: normal;
+    }
+
+    .heroVisual {
+        min-height: 520px;
+    }
+
+    .heroBadge {
+        top: 14px;
+        right: 14px;
+        width: 122px;
+        padding: 12px;
+    }
+
+    .heroVolumeBadge {
+        top: 14px;
+        left: 14px;
+        padding: 7px 12px;
+        font-size: 0.64rem;
+        letter-spacing: 0.18em;
+    }
+
+    .catalogSection {
+        padding: 22px 16px;
     }
 }

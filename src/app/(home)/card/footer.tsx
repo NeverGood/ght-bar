@@ -24,16 +24,25 @@ export default function Footer({
 }) {
     return (
         <>
-            <h5 className="mb-1 text-xl font-medium text-gray-900 ">{name}</h5>
-            <ul className="flex flex-col items-center pb-10">
-                <li className="text-sm text-gray-500 ">
-                    <Link href={`/?type=${type}`}>{type}</Link>
+            <h5 className="mb-2 w-full break-words text-center text-2xl font-semibold text-stone-100">
+                {name}
+            </h5>
+            <ul className="flex w-full flex-col items-center gap-1 pb-4 text-center">
+                <li className="w-full break-words text-sm text-stone-400">
+                    <Link className="break-words" href={`/?type=${type}`}>
+                        {type}
+                    </Link>
                 </li>
-                <li className="text-sm text-gray-500 ">
-                    <Link href={`/?strength=${strength}`}>{strength} %</Link>
+                <li className="w-full break-words text-sm text-stone-400">
+                    <Link className="break-words" href={`/?strength=${strength}`}>
+                        {strength} %
+                    </Link>
                 </li>
-                <li className="text-sm text-gray-500 ">
-                    <Link href={`/?countryOrigin=${countryOrigin}`}>
+                <li className="w-full break-words text-sm text-stone-400">
+                    <Link
+                        className="break-words"
+                        href={`/?countryOrigin=${countryOrigin}`}
+                    >
                         {countryOrigin}{" "}
                         <ReactCountryFlag
                             countryCode={
@@ -43,10 +52,14 @@ export default function Footer({
                         />
                     </Link>
                 </li>
-                <li className="text-sm text-gray-500 ">
-                    <Link href={`/?user=${user}`}>{user}</Link>
+                <li className="w-full break-words text-sm text-stone-400">
+                    <Link className="break-words" href={`/?user=${user}`}>
+                        {user}
+                    </Link>
                 </li>
-                <li className="text-sm text-gray-500 ">{notes}</li>
+                <li className="w-full break-words px-3 pt-2 text-sm text-stone-500">
+                    {notes}
+                </li>
             </ul>
             {/* <div className="flex mt-4 space-x-3 md:mt-6">
                     <a

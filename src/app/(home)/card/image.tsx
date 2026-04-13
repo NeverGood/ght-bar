@@ -5,28 +5,41 @@ import Image from "next/image";
 
 import { Item } from "@/models/types";
 
+export function getBottleImageUrl(image: Item["image"]) {
+    const defaultImageUrl = "/images/whiskey.svg";
+
+    return image ? `http://ght.bar/images/${image}` : defaultImageUrl;
+}
+
 export default function ImageComponent({
     image,
     name,
+    className = "h-40 w-40 rounded-full",
+    height = 200,
+    width = 200,
+    quality = 30,
 }: {
     image: Item["image"];
     name: Item["name"];
+    className?: string;
+    height?: number;
+    width?: number;
+    quality?: number;
 }) {
     const defaultImageUrl = "/images/whiskey.svg";
-
-    const imageUrl = image ? `http://ght.bar/images/${image}` : defaultImageUrl;
+    const imageUrl = getBottleImageUrl(image);
 
     return (
         <Image
             alt={name}
             blurDataURL={defaultImageUrl}
-            className="w-40 h-40 rounded-full"
-            height={200}
+            className={className}
+            height={height}
             loading="lazy"
             placeholder="blur"
-            quality={30}
+            quality={quality}
             src={imageUrl}
-            width={200}
+            width={width}
         />
     );
 }

@@ -1,35 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/auth";
+import { getCatalogList } from "@/lib/bottle-catalog";
 
 const handler = async (req: NextRequest) => {
     console.info("get bottles request from client component");
 
     const { searchParams } = new URL(req.url);
-
-    const strength = searchParams.get("strength") || null;
-    const name = searchParams.get("name");
-    const countryOrigin = searchParams.get("countryOrigin") || "";
-    const user = searchParams.get("user") || "";
-    const page = Number(searchParams.get("page") || 0);
-    const type = searchParams.get("type") || "";
-
-    let take = 20;
-
-    if (page) {
-        take = (page + 1) * 20;
-    }
-
-    const result = await prisma.items.findMany({
-        where: {
-            ...(strength ? { strength: Number(strength) } : {}),
-            ...(name ? { name: { contains: name } } : {}),
-            ...(countryOrigin
-                ? { countryOrigin: { contains: countryOrigin } }
-                : {}),
-            ...(user ? { user: { contains: user } } : {}),
-            ...(type ? { type: { contains: type } } : {}),
-        },
-        take,
+    const result = await getCatalogList({
+        countryOrigin: searchParams.get("countryOrigin") || "",
+        name: searchParams.get("name") || "",
+        page: Number(searchParams.get("page") || 0),
+        strength: searchParams.get("strength") || "",
+        type: searchParams.get("type") || "",
+        user: searchParams.get("user") || "",
     });
 
     return NextResponse.json(result, {

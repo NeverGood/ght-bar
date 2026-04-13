@@ -10,18 +10,30 @@ const Input: React.FC<
       } & InputHTMLAttributes<HTMLInputElement>)
     | any
 > = React.forwardRef(({ label, error, ...rest }, ref) => {
+    const autoCompleteValue =
+        typeof rest.autoComplete === "boolean"
+            ? rest.autoComplete
+                ? "on"
+                : "off"
+            : rest.autoComplete;
+    const { autoComplete, ...inputProps } = rest;
+
     return (
-        <div className="mb-4">
-            <label className="sr-only" htmlFor={rest.name}>
+        <div className="min-w-0">
+            <label
+                className="mb-2 block text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-stone-500"
+                htmlFor={rest.name}
+            >
                 {label}
             </label>
             <input
                 //@ts-ignore
                 ref={ref}
-                className="relative block w-full  appearance-none rounded-none rounded-t-md rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm"
-                {...rest}
+                className="relative block h-11 w-full appearance-none rounded-xl border border-white/8 bg-[#0d1118] px-3.5 py-2 text-sm text-stone-100 placeholder-stone-500 outline-none transition focus:border-[#d5a25c]/45 focus:ring-2 focus:ring-[#d5a25c]/15"
+                autoComplete={autoCompleteValue}
+                {...inputProps}
             />
-            <div className="text-rose-400 text-xs">{error}</div>
+            <div className="pt-1.5 text-xs text-rose-400">{error}</div>
         </div>
     );
 });

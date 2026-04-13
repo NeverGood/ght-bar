@@ -20,9 +20,9 @@ export default function Header({ id }: { id: Item["id"] }) {
 
     return (
         <>
-            <div className="flex justify-end px-4 pt-4">
+            <div className="flex justify-end px-4 pt-4" data-card-action>
                 <button
-                    className="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100  focus:ring-4 focus:outline-none focus:ring-gray-200  rounded-lg text-sm p-1.5"
+                    className="inline-block rounded-full p-2 text-stone-400 transition hover:bg-white/5 hover:text-stone-100 focus:outline-none focus:ring-2 focus:ring-[#d5a25c]/40"
                     data-dropdown-toggle="dropdown"
                     id="dropdownButton"
                     type="button"
@@ -45,7 +45,8 @@ export default function Header({ id }: { id: Item["id"] }) {
                         <div
                             className={`${
                                 !isSettingsOpen ? "hidden" : ""
-                            } absolute right-16 z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow `}
+                            } absolute right-16 z-10 w-44 list-none divide-y divide-white/10 rounded-2xl border border-white/10 bg-[#141922] text-base shadow-[0_24px_60px_rgba(0,0,0,0.4)]`}
+                            data-card-action
                             id="dropdown"
                         >
                             <ul
@@ -54,7 +55,7 @@ export default function Header({ id }: { id: Item["id"] }) {
                             >
                                 <li>
                                     <a
-                                        className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
+                                        className="block px-4 py-2 text-sm text-stone-200 transition hover:bg-white/5"
                                         href={`/admin/${id}`}
                                     >
                                         Edit
