@@ -76,35 +76,35 @@ export default function Form() {
 
     return (
         <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex justify-center text-rose-400">
+            <div className="flex justify-center text-sm text-rose-400">
                 <div>{error && error.info ? error.info.message : null}</div>
             </div>
-            <div className=" rounded-md shadow-sm">
+            <div className="space-y-5 rounded-md shadow-sm">
                 <Input
                     {...register("email")}
                     autoComplete="email"
                     error={errors.email?.message}
                     id="email"
                     label="Email"
-                    placeholder="Email"
+                    placeholder="you@example.com"
                     type="email"
                 />
                 <Input
                     {...register("password")}
-                    autoComplete="password"
+                    autoComplete="new-password"
                     error={errors.password?.message}
                     id="password"
                     label="Password"
-                    placeholder="Password"
+                    placeholder="Введите пароль"
                     type="password"
                 />
                 <Input
                     {...register("confirmPassword")}
-                    autoComplete="password"
+                    autoComplete="new-password"
                     error={errors.confirmPassword?.message}
                     id="confirmPassword"
                     label="Repeat password"
-                    placeholder="Repeat password"
+                    placeholder="Повторите пароль"
                     type="password"
                 />
                 <Input
@@ -112,8 +112,8 @@ export default function Form() {
                     autoComplete="nickname"
                     error={errors.login?.message}
                     id="login"
-                    label="login"
-                    placeholder="Login"
+                    label="Login"
+                    placeholder="Ваш логин"
                     type="text"
                 />
                 <Input
@@ -123,16 +123,18 @@ export default function Form() {
                     id="name"
                     label="Name"
                     name="name"
-                    placeholder="Name"
+                    placeholder="Ваше имя"
                     type="text"
                 />
             </div>
             <button
-                className="group relative flex w-full justify-center rounded-md border border-transparent bg-slate-600 py-2 px-4 text-sm font-medium text-white hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+                className="group relative h-14 w-full rounded-full border border-[#d5a25c]/30 bg-[#d5a25c] px-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#17130d] shadow-[0_20px_40px_rgba(213,162,92,0.22)] transition hover:-translate-y-0.5 hover:bg-[#ddb06b] focus:outline-none focus:ring-2 focus:ring-[#d5a25c]/35"
                 disabled={isMutating}
                 type="submit"
             >
-                Sign up
+                <span className="absolute inset-0 flex items-center justify-center text-center leading-none">
+                    Создать доступ
+                </span>
             </button>
         </form>
     );

@@ -1,45 +1,51 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-    // reactStrictMode: true,
-    swcMinify: true,
-    eslint: {
-        ignoreDuringBuilds: true,
-    },
+const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 
-    images: {
-        disableStaticImages: true,
-        remotePatterns: [
-            {
-                protocol: "http",
-                hostname: "**",
-                port: "",
-                pathname: "**",
-            },
-        ],
-    },
+module.exports = (phase) => {
+    /** @type {import('next').NextConfig} */
+    const nextConfig = {
+        // reactStrictMode: true,
+        swcMinify: true,
+        distDir:
+            phase === PHASE_DEVELOPMENT_SERVER ? ".next-dev" : ".next",
+        eslint: {
+            ignoreDuringBuilds: true,
+        },
 
-    webpack(config, { isServer }) {
-        config.module.rules.push({
-            test: /\.svg$/i,
-            issuer: /\.[jt]sx?$/,
-            use: ["@svgr/webpack"],
-        });
+        images: {
+            disableStaticImages: true,
+            remotePatterns: [
+                {
+                    protocol: "http",
+                    hostname: "**",
+                    port: "",
+                    pathname: "**",
+                },
+            ],
+        },
 
-        if (!isServer) {
-            config.resolve.fallback.net = false;
-            config.resolve.fallback.tls = false;
-            config.resolve.fallback.fs = false;
-        }
+        webpack(config, { isServer }) {
+            config.module.rules.push({
+                test: /\.svg$/i,
+                issuer: /\.[jt]sx?$/,
+                use: ["@svgr/webpack"],
+            });
 
-        return config;
-    },
-    env: {
-        MYSQL_HOST: process.env.MYSQL_HOST,
-        MYSQL_PORT: process.env.MYSQL_PORT,
-        MYSQL_DATABASE: process.env.MYSQL_DATABASE,
-        MYSQL_USER: process.env.MYSQL_USER,
-        MYSQL_PASSWORD: process.env.MYSQL_PASSWORD,
-    },
+            if (!isServer) {
+                config.resolve.fallback.net = false;
+                config.resolve.fallback.tls = false;
+                config.resolve.fallback.fs = false;
+            }
+
+            return config;
+        },
+        env: {
+            MYSQL_HOST: process.env.MYSQL_HOST,
+            MYSQL_PORT: process.env.MYSQL_PORT,
+            MYSQL_DATABASE: process.env.MYSQL_DATABASE,
+            MYSQL_USER: process.env.MYSQL_USER,
+            MYSQL_PASSWORD: process.env.MYSQL_PASSWORD,
+        },
+    };
+
+    return nextConfig;
 };
-
-module.exports = nextConfig;

@@ -6,31 +6,37 @@ export default function LoginForm() {
     return (
         <FormComponent>
             <input name="remember" type="hidden" value="true" />
-            <div className="-space-y-px rounded-md shadow-sm">
-                <div>
-                    <label className="sr-only" htmlFor="email-address">
-                        Username
+            <div className="space-y-5">
+                <div className="min-w-0">
+                    <label
+                        className="mb-2 block text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-stone-500"
+                        htmlFor="username"
+                    >
+                        Login
                     </label>
                     <input
                         autoComplete="username"
-                        className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm"
+                        className="relative block h-12 w-full appearance-none rounded-xl border border-white/8 bg-[#0d1118] px-3.5 py-2 text-sm text-stone-100 placeholder-stone-500 outline-none transition focus:border-[#d5a25c]/45 focus:ring-2 focus:ring-[#d5a25c]/15"
                         id="username"
                         name="username"
-                        placeholder="Username"
+                        placeholder="Ваш логин"
                         type="username"
                         required
                     />
                 </div>
-                <div>
-                    <label className="sr-only" htmlFor="password">
+                <div className="min-w-0">
+                    <label
+                        className="mb-2 block text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-stone-500"
+                        htmlFor="password"
+                    >
                         Password
                     </label>
                     <input
                         autoComplete="current-password"
-                        className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm"
+                        className="relative block h-12 w-full appearance-none rounded-xl border border-white/8 bg-[#0d1118] px-3.5 py-2 text-sm text-stone-100 placeholder-stone-500 outline-none transition focus:border-[#d5a25c]/45 focus:ring-2 focus:ring-[#d5a25c]/15"
                         id="password"
                         name="password"
-                        placeholder="Password"
+                        placeholder="Ваш пароль"
                         type="password"
                         required
                     />

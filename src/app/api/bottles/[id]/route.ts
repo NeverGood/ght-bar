@@ -70,6 +70,7 @@ const handler = async (req: NextRequest) => {
             const strength = data.get("strength") as string;
             const countryOrigin = data.get("countryOrigin") as string;
             const user = data.get("user") as string;
+            const notes = data.get("notes") as string;
             const file: File | null = data.get("image") as unknown as File;
             const now = new Date();
 
@@ -86,14 +87,17 @@ const handler = async (req: NextRequest) => {
                 },
 
                 data: {
-                    countryOrigin,
+                    countryOrigin: countryOrigin || bottle?.countryOrigin || "",
                     //@ts-ignore
                     image: file?.name ?? bottle.image,
-                    name,
-                    strength: Number(strength),
-                    type,
+                    name: name || bottle?.name || "",
+                    notes: typeof notes === "string" ? notes : bottle?.notes || "",
+                    strength: strength
+                        ? Number(strength)
+                        : Number(bottle?.strength ?? 0),
+                    type: type || bottle?.type || "",
                     updatedAt: now,
-                    user,
+                    user: user || bottle?.user || "",
                 },
             });
 

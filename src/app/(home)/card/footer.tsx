@@ -9,14 +9,12 @@ import { COUNTRY } from "./constants";
 
 export default function Footer({
     name,
-    notes,
     strength,
     user,
     countryOrigin,
     type,
 }: {
     name: Item["name"];
-    notes: Item["notes"];
     strength: Item["strength"];
     user: Item["user"];
     countryOrigin: Item["countryOrigin"];
@@ -56,9 +54,6 @@ export default function Footer({
                     <Link className="break-words" href={`/?user=${user}`}>
                         {user}
                     </Link>
-                </li>
-                <li className="w-full break-words px-3 pt-2 text-sm text-stone-500">
-                    {notes}
                 </li>
             </ul>
             {/* <div className="flex mt-4 space-x-3 md:mt-6">

@@ -1,26 +1,15 @@
 export default function SubmitButton() {
     return (
-        <div>
+        <div className="pt-2">
             <button
-                className="group relative flex w-full justify-center rounded-md border border-transparent bg-slate-600 py-2 px-4 text-sm font-medium text-white hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+                className="group relative h-14 w-full rounded-full border border-[#d5a25c]/30 bg-[#d5a25c] px-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#17130d] shadow-[0_20px_40px_rgba(213,162,92,0.22)] transition hover:-translate-y-0.5 hover:bg-[#ddb06b] focus:outline-none focus:ring-2 focus:ring-[#d5a25c]/35"
                 type="submit"
             >
-                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                    <svg
-                        aria-hidden="true"
-                        className="h-5 w-5 text-emerald-500 group-hover:text-emerald-400"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            clipRule="evenodd"
-                            d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z"
-                            fillRule="evenodd"
-                        />
-                    </svg>
+                <span className="absolute inset-0 grid place-items-center">
+                    <span className="block text-center leading-none">
+                        Войти
+                    </span>
                 </span>
-                Sign in
             </button>
         </div>
     );

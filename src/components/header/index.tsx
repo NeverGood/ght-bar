@@ -3,13 +3,14 @@ import React from "react";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 
-import { authOptions } from "@/lib/auth";
+import { authOptions, type AppSessionUser } from "@/lib/auth";
 
 import SignOutButton from "./sign-out-button";
 import SignButton from "./sign-button";
 
 export default async function Header() {
     const session = await getServerSession(authOptions);
+    const currentUser = session?.user as AppSessionUser | undefined;
 
     return (
         <header className="w-full px-3 pt-3">
@@ -54,15 +55,10 @@ export default async function Header() {
                                     <>
                                         <li className="nav-item">
                                             <div className="inline-flex h-11 min-w-[96px] items-center justify-center rounded-full border border-white/8 bg-white/[0.04] px-4 text-xs font-semibold uppercase tracking-[0.14em] text-stone-300">
-                                                {
-                                                    //@ts-ignore
-                                                    session?.user?.username
-                                                }
+                                                {currentUser?.username}
                                             </div>
                                         </li>
-                                        {
-                                            //@ts-ignore TODO изменить тип
-                                            session?.user?.isAdmin && (
+                                        {currentUser?.isAdmin && (
                                                 <li className="nav-item cursor-pointer">
                                                     <div className="flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
                                                         <Link
@@ -78,8 +74,7 @@ export default async function Header() {
                                                         </Link>
                                                     </div>
                                                 </li>
-                                            )
-                                        }
+                                        )}
                                         {/* <li className="nav-item cursor-pointer">
                                             <div className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75">
                                                 <Link

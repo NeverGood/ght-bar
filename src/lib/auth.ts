@@ -1,10 +1,18 @@
 /* eslint-disable sort-keys */
 import bCrypt from "bcrypt";
+import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient } from "@prisma/client";
 
 const globalForPrisma = globalThis as unknown as {
     prisma?: PrismaClient;
+};
+
+export type AppSessionUser = {
+    id?: string;
+    isAdmin?: boolean | null;
+    mail?: string | null;
+    username?: string | null;
 };
 
 export const prisma = globalForPrisma.prisma ?? new PrismaClient();
@@ -13,10 +21,13 @@ if (process.env.NODE_ENV !== "production") {
     globalForPrisma.prisma = prisma;
 }
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({
-            //@ts-ignore
+            credentials: {
+                password: { label: "Password", type: "password" },
+                username: { label: "Username", type: "text" },
+            },
             authorize: async (credentials) => {
                 const username = credentials?.username ?? "";
                 const password = credentials?.password ?? "";
@@ -42,17 +53,14 @@ export const authOptions = {
                 }
 
                 if (isLoggedIn) {
-                    // Any object returned will be saved in `user` property of the JWT
                     return {
+                        id: user?.id?.toString() ?? "",
                         username: user?.username,
                         mail: user?.mail,
                         isAdmin: user?.isAdmin,
                     };
                 } else {
-                    // If you return null then an error will be displayed advising the user to check their details.
                     return null;
-
-                    // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
                 }
             },
         }),
@@ -73,8 +81,6 @@ export const authOptions = {
     },
 
     pages: {
-        // signIn
-        signIn: "/login", //Need to define custom login page (if using)
-        admin: "/admin",
+        signIn: "/login",
     },
 };

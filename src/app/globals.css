@@ -1,6 +1,6 @@
-@import "tailwindcss/base";
 @import "@radix-ui/themes/styles.css";
 
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -37,6 +37,10 @@ body {
     line-height: 1.6;
     font-size: 18px;
     height: 100%;
+}
+
+body {
+    min-height: 100%;
 }
 
 /* body {

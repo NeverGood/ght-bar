@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 // import { useRouter } from "next/navigation";
 
 import type { Item } from "@/models/types";
+import type { AppSessionUser } from "@/lib/auth";
 
 import DeleteDialog from "./dialog";
 
@@ -13,6 +14,7 @@ export default function Header({ id }: { id: Item["id"] }) {
     const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
     const toggleSettings = () => setIsSettingsOpen((prev) => !prev);
     const { data: session } = useSession();
+    const currentUser = session?.user as AppSessionUser | undefined;
     // const router = useRouter();
 
     // const [isDeleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false);
@@ -39,9 +41,7 @@ export default function Header({ id }: { id: Item["id"] }) {
                         <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
                     </svg>
                 </button>
-                {
-                    //@ts-ignore
-                    session && session?.user?.isAdmin && (
+                {session && currentUser?.isAdmin && (
                         <div
                             className={`${
                                 !isSettingsOpen ? "hidden" : ""
@@ -97,8 +97,7 @@ export default function Header({ id }: { id: Item["id"] }) {
                                 </li>
                             </ul>
                         </div>
-                    )
-                }
+                )}
             </div>
             {/* <DeleteDialog isOpen={isDeleteDialogOpen} /> */}
         </>

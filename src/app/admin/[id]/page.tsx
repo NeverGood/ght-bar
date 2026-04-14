@@ -3,15 +3,17 @@ import React from "react";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
-import { authOptions, prisma } from "@/lib/auth";
+import { authOptions, prisma, type AppSessionUser } from "@/lib/auth";
+import AccessShell from "@/components/access-shell";
 
 import Form from "../form";
 import ImageComponent from "@/app/(home)/card/image";
 
 export default async function Admin({ params }: { params: { id: string } }) {
     const session = await getServerSession(authOptions);
+    const currentUser = session?.user as AppSessionUser | undefined;
 
-    if (!session || !session?.user?.isAdmin) {
+    if (!session || !currentUser?.isAdmin) {
         redirect("/");
     }
 
@@ -30,23 +32,26 @@ export default async function Admin({ params }: { params: { id: string } }) {
     const typesArray = types?.map((type) => type.type);
 
     return (
-        <div className="flex  items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-            <div className="w-full max-w-md space-y-8">
-                <div>
-                    <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-                        Edit миньон page
-                    </h2>
-                </div>
+        <AccessShell
+            eyebrow="private access"
+            panelEyebrow="admin"
+            panelTitle="Редактирование бутылки"
+            title="ghT Mini Bar"
+        >
+            <div className="space-y-6">
                 {bottle?.image && (
-                    <div className="flex justify-center">
+                    <div className="flex justify-center rounded-[24px] border border-white/8 bg-white/[0.03] p-5">
                         <ImageComponent
                             image={bottle?.image}
                             name={bottle?.name || ""}
+                            className="h-48 w-48 rounded-[24px] object-cover"
+                            height={280}
+                            width={280}
                         />
                     </div>
                 )}
                 <Form item={bottle} users={usersArray} types={typesArray} />
             </div>
-        </div>
+        </AccessShell>
     );
 }

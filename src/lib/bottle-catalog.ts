@@ -139,6 +139,20 @@ const MOCK_BOTTLES: Item[] = [
     },
 ];
 
+const mockCatalogFallbackEnabled =
+    process.env.ALLOW_MOCK_CATALOG_FALLBACK === "true" ||
+    process.env.NODE_ENV !== "production";
+
+function rethrowCatalogError(context: string, error: unknown) {
+    console.error(`[catalog] ${context} failed`, error);
+
+    if (!mockCatalogFallbackEnabled) {
+        throw error instanceof Error
+            ? error
+            : new Error(`[catalog] ${context} failed`);
+    }
+}
+
 function containsValue(source: string | null, query: string | undefined) {
     if (!query) {
         return true;
@@ -211,7 +225,9 @@ export async function getCatalogPage(
         });
 
         return { count, items };
-    } catch {
+    } catch (error) {
+        rethrowCatalogError("getCatalogPage", error);
+
         const filtered = filterMockBottles(searchParams);
 
         return {
@@ -236,7 +252,9 @@ export async function getCatalogList(searchParams: SearchParamsLike) {
             where,
             take,
         });
-    } catch {
+    } catch (error) {
+        rethrowCatalogError("getCatalogList", error);
+
         const filtered = filterMockBottles(searchParams);
 
         if (page) {
@@ -278,7 +296,9 @@ export async function getCatalogFilterOptions(): Promise<CatalogFilterOptions> {
             types: uniqueSorted(types.map((item) => item.type)),
             users: uniqueSorted(users.map((item) => item.user)),
         };
-    } catch {
+    } catch (error) {
+        rethrowCatalogError("getCatalogFilterOptions", error);
+
         return {
             countries: uniqueSorted(
                 MOCK_BOTTLES.map((item) => item.countryOrigin)
@@ -303,7 +323,9 @@ export async function getCatalogOverview(): Promise<CatalogOverview> {
             totalTypes: filterOptions.types.length,
             totalUsers: filterOptions.users.length,
         };
-    } catch {
+    } catch (error) {
+        rethrowCatalogError("getCatalogOverview", error);
+
         const countries = uniqueSorted(MOCK_BOTTLES.map((item) => item.countryOrigin));
         const types = uniqueSorted(MOCK_BOTTLES.map((item) => item.type));
         const users = uniqueSorted(MOCK_BOTTLES.map((item) => item.user));
@@ -347,7 +369,9 @@ export async function getHeroBottles(): Promise<HeroBottle[]> {
                 type: item.type || "",
             }));
         }
-    } catch {}
+    } catch (error) {
+        rethrowCatalogError("getHeroBottles", error);
+    }
 
     return MOCK_BOTTLES.slice(0, 4).map((item) => ({
         countryOrigin: item.countryOrigin,
