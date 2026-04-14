@@ -14,6 +14,7 @@ export default function FilterController({
     const pathname = usePathname();
     const [isFilterOpen, setFilterOpen] = useState(true);
     const activeFilters = [
+        searchParams.get("collection"),
         searchParams.get("type"),
         searchParams.get("strength"),
         searchParams.get("name"),

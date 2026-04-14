@@ -78,6 +78,10 @@ export default async function Home({ searchParams }: any) {
                     <span>типов алкоголя в базе</span>
                 </article>
                 <article className={styles.statCard}>
+                    <strong>{overview.totalCollections}</strong>
+                    <span>коллекций в каталоге</span>
+                </article>
+                <article className={styles.statCard}>
                     <strong>{overview.totalCountries}</strong>
                     <span>стран происхождения</span>
                 </article>

@@ -6,6 +6,7 @@ const handler = async (req: NextRequest) => {
 
     const { searchParams } = new URL(req.url);
     const result = await getCatalogPage({
+        collection: searchParams.get("collection") || "",
         countryOrigin: searchParams.get("countryOrigin") || "",
         name: searchParams.get("name") || "",
         page: Number(searchParams.get("page") || 0),

@@ -8,12 +8,14 @@ import type { Item } from "@/models/types";
 import { COUNTRY } from "./constants";
 
 export default function Footer({
+    collection,
     name,
     strength,
     user,
     countryOrigin,
     type,
 }: {
+    collection: Item["collection"];
     name: Item["name"];
     strength: Item["strength"];
     user: Item["user"];
@@ -25,6 +27,16 @@ export default function Footer({
             <h5 className="mb-2 w-full break-words text-center text-2xl font-semibold text-stone-100">
                 {name}
             </h5>
+            {collection ? (
+                <div className="mb-2 flex w-full justify-center">
+                    <Link
+                        className="inline-flex min-h-8 items-center justify-center rounded-full border border-[#d5a25c]/18 bg-[#d5a25c]/8 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[#ddb06b] transition hover:border-[#d5a25c]/30 hover:bg-[#d5a25c]/12"
+                        href={`/?collection=${encodeURIComponent(collection)}`}
+                    >
+                        {collection}
+                    </Link>
+                </div>
+            ) : null}
             <ul className="flex w-full flex-col items-center gap-1 pb-4 text-center">
                 <li className="w-full break-words text-sm text-stone-400">
                     <Link className="break-words" href={`/?type=${type}`}>

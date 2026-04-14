@@ -30,6 +30,7 @@ export default function ImageComponent({
 }) {
     const defaultImageUrl = "/images/whiskey.svg";
     const [imageSrc, setImageSrc] = React.useState(getBottleImageUrl(image));
+    const isRemoteImage = imageSrc.startsWith("http://") || imageSrc.startsWith("https://");
 
     React.useEffect(() => {
         setImageSrc(getBottleImageUrl(image));
@@ -46,6 +47,7 @@ export default function ImageComponent({
             placeholder="blur"
             quality={quality}
             src={imageSrc}
+            unoptimized={isRemoteImage}
             width={width}
         />
     );

@@ -1,5 +1,6 @@
 export type Item = {
     code_iso: string;
+    collection?: null | string;
     countryOrigin: string;
     createdAt: string; //date
     id: number; // ?? string ?

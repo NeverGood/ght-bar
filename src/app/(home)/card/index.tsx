@@ -13,6 +13,7 @@ import Header from "./header";
 import Footer from "./footer";
 
 export default function Card({
+    collection,
     image,
     name,
     notes,
@@ -241,10 +242,11 @@ export default function Card({
                 <div className="flex w-full flex-col items-center gap-3 px-6 pb-8">
                     <br />
                     <ImageComponent image={image} name={name} />
-                    <Footer
-                        countryOrigin={countryOrigin}
-                        name={name}
-                        strength={strength}
+    <Footer
+        collection={collection}
+        countryOrigin={countryOrigin}
+        name={name}
+        strength={strength}
                         user={user}
                         type={type}
                     />
